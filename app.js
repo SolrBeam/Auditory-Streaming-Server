@@ -22,7 +22,7 @@ app.get('/',function(req,res){
 
 });
 
-app.get('/home',function(req,res){
+app.get('/home_page',function(req,res){
 	
 	return res.redirect('/public/home.html');
 
@@ -37,11 +37,11 @@ app.use('/public', express.static(__dirname + '/public'));
 
 // ===================== Streaming =====================
 
-app.get('/music', function(req,res){
+app.get('/streaming', function(req,res){
 	
 	// Requested file, query by ID (audio name)
 	var fileId = req.query.id; 
-	var file = __dirname + '/music/' + fileId;
+	var file = __dirname + '/repository/' + fileId;
 	fs.exists(file,function(exists){
 		if(exists)
 		{
@@ -68,7 +68,7 @@ app.get('/download', function(req,res){
 
 	// Requested file, query by ID (audio name)
 	var fileId = req.query.id;
-	var file = __dirname + '/music/' + fileId;
+	var file = __dirname + '/repository/' + fileId;
 	fs.exists(file,function(exists){
 		if(exists)
 		{
@@ -92,7 +92,7 @@ app.get('/download', function(req,res){
 var storage =   multer.diskStorage({
   // for managing location where file will be saved in streaming server
   destination: function (req, file, callback) {
-    callback(null, './music');
+    callback(null, './repository');
   },
   // for managing file name after audio has been uploaded
   filename: function (req, file, callback) {
